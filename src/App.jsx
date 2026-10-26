@@ -1,4 +1,7 @@
 import NavBar from "./components/NavBar";
+import Intro from "./components/Intro";
+import About from "./components/About";
+import Experience from "./components/Experience";
 
 function App() {
   return (
@@ -7,7 +10,11 @@ function App() {
         Skip to content
       </a>
       <NavBar />
-      <main></main>
+      <main>
+        <Intro />
+        <About />
+        <Experience />
+      </main>
       <footer className="footer">
         <div className="container"></div>
       </footer>

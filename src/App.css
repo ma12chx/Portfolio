@@ -40,24 +40,6 @@
   color-scheme: dark;
 }
 
-/* :root[data-theme="light"] {
-  --bg: #fffbeb;
-  --surface: color-mix(in srgb, #fffbeb 55%, white);
-  --border: color-mix(in srgb, #1f1f1f 16%, transparent);
-  --text: #1f1f1f;
-  --text-soft: color-mix(in srgb, #1f1f1f 76%, #fffbeb);
-  --accent: #644ac9;
-  --accent-ink: #644ac9;
-  --on-accent: #fffbeb;
-  --green-ink: #14710a;
-  --orange-ink: #a34d14;
-  --pink-ink: #a3144d;
-  --purple-ink: #644ac9;
-  --grad: linear-gradient(90deg, #036a96, #644ac9 55%, #a3144d);
-  --glow: color-mix(in srgb, #644ac9 16%, transparent);
-  color-scheme: light;
-} */
-
 *,
 *::before,
 *::after {
@@ -238,22 +220,30 @@ a {
   color: var(--on-accent);
 }
 
-/* ---------- Hero ---------- */
-.hero {
+/* ---------- Intro ---------- */
+.intro {
   position: relative;
   overflow: hidden;
-  padding: clamp(2.5rem, 7vw, 5.5rem) 0 clamp(3rem, 7vw, 5.5rem);
+  padding: clamp(4rem, 11vw, 8rem) 0 clamp(4rem, 10vw, 7rem);
 }
-.hero-glow {
+.intro-glow {
   position: absolute;
-  top: -10%;
-  right: -8%;
-  width: 60%;
+  top: -20%;
+  left: 50%;
+  width: min(900px, 120%);
   height: 90%;
+  transform: translateX(-50%);
   background: radial-gradient(closest-side, var(--glow), transparent);
   pointer-events: none;
 }
-.hero-grid {
+.intro-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.intro-grid {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -280,12 +270,18 @@ a {
   background: var(--green-ink);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--green-ink) 25%, transparent);
 }
-.hero h1 {
-  font-size: clamp(2.5rem, 5.6vw, 4.4rem);
+.intro h1 {
+  font-size: clamp(2.5rem, 7vw, 5rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.04;
-  text-wrap: wrap;
+  text-wrap: balance;
+}
+.intro h2 {
+  font-size: clamp(1.5rem, 3.5vw, 5rem);
+  margin-top: 10px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
 }
 .grad {
   background: var(--grad);
@@ -293,19 +289,78 @@ a {
   background-clip: text;
   color: transparent;
 }
-.hero-sub {
+.intro-sub {
   margin-top: 1.5rem;
-  max-width: 32rem;
+  max-width: 45rem;
   color: var(--text-soft);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
-.hero-actions {
+.intro-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 2rem;
 }
-.hero-loc {
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 3.25rem;
+  justify-content: center;
+}
+.social {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s,
+    transform 0.15s;
+}
+.social svg {
+  width: 22px;
+  height: 22px;
+}
+.social::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
+}
+.social:hover,
+.social:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  transform: translateY(-2px);
+}
+.social:hover::after,
+.social:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.intro-loc {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -313,24 +368,6 @@ a {
   font-family: var(--font-mono);
   font-size: 0.9rem;
   color: var(--text-soft);
-}
-
-.code-window {
-  min-width: 0;
-  background: var(--code-bg);
-  color: var(--code-text);
-  border: 1px solid color-mix(in srgb, var(--drac-fg) 14%, transparent);
-  border-radius: 16px;
-  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.6);
-  transform: rotate(2deg);
-  overflow: hidden;
-}
-.code-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.9rem 1.1rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--drac-fg) 12%, transparent);
 }
 .dot {
   width: 12px;
@@ -439,7 +476,7 @@ a {
 .company-name {
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--orange-ink);
+  color: var(--cyan);
   margin-bottom: 1.25rem;
 }
 .roles {
@@ -667,7 +704,7 @@ a {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
-  .hero-grid {
+  .intro-grid {
     grid-template-columns: minmax(0, 1fr);
   }
   .code-window {

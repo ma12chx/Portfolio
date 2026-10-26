@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { profile } from "../data";
+import { MenuIcon, CloseIcon } from "./Icons.jsx";
 
 const links = [
   { id: "about", label: "About" },
@@ -57,6 +58,18 @@ function NavBar() {
             ))}
           </ul>
         </nav>
+
+        <div className="nav-tools">
+          <button
+            type="button"
+            className="icon-btn menu-btn"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            {open ? <CloseIcon /> : <MenuIcon />}
+          </button>
+        </div>
       </div>
     </header>
   );
