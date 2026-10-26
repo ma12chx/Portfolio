@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
 /* ---------- Tokens ---------- */
 /* Dracula palette */
 :root {
@@ -33,7 +36,7 @@
   --code-bg: var(--drac-darker);
   --code-text: var(--drac-fg);
 
-  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Google Sans", system-ui, sans-serif;
   --font-mono:
     "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --radius: 14px;
@@ -118,6 +121,14 @@ a {
 }
 .skip-link:focus {
   top: 1rem;
+}
+
+.copyright-symbol {
+  display: inline-block;
+  font-size: 1.4em;
+  font-weight: 600;
+  vertical-align: middle;
+  margin-right: 0.1em;
 }
 
 /* ---------- Nav ---------- */
@@ -218,6 +229,18 @@ a {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-accent);
+}
+.btn-demo {
+  width: fit-content;
+  align-self: flex-start;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+.btn-demo svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
 /* ---------- Intro ---------- */
@@ -439,7 +462,7 @@ a {
 }
 .lead {
   max-width: 44rem;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: var(--text-soft);
 }
 
@@ -511,9 +534,22 @@ a {
   font-size: 1.3rem;
 }
 .period {
-  color: var(--text-soft);
+  flex-shrink: 0;
+  white-space: nowrap;
   font-family: var(--font-mono);
   font-size: 0.85rem;
+  color: var(--text-soft);
+  text-align: right;
+}
+.training-head,
+.education-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.training-head h3 {
+  min-width: 0;
 }
 .bullets {
   display: grid;
@@ -654,6 +690,11 @@ a {
   font-size: 1.35rem;
 }
 .card-org {
+  color: var(--pink-ink) !important;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.card-university {
   color: var(--orange-ink) !important;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -700,6 +741,9 @@ a {
   border-top: 1px solid var(--border);
   color: var(--text-soft);
   font-size: 0.92rem;
+}
+.footer .container {
+  text-align: center;
 }
 
 /* ---------- Responsive ---------- */

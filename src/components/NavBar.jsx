@@ -5,10 +5,10 @@ import { MenuIcon, CloseIcon } from "./Icons.jsx";
 const links = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "training", label: "Training" },
   { id: "education", label: "Education" },
-  { id: "contact", label: "Contact" },
 ];
 
 function NavBar() {

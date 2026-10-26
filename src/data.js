@@ -81,3 +81,73 @@ export const experience = [
     ],
   },
 ];
+
+export const projects = [
+  {
+    title: "Tixniverse",
+    context: "Personal project, 2026",
+    text: "A personal web application for collecting and keeping track of event tickets (concerts, fan meetings, festivals and more).",
+    tags: [
+      "React.js",
+      "Vite",
+      "Tailwind CSS",
+      "SweetAlert2",
+      "Supabase",
+      "GitHub Actions",
+      "GitHub Pages",
+    ],
+    url: "https://github.com/ma12chx/Tixniverse",
+    accent: "purple",
+    liveDemo: "https://ma12chx.github.io/Tixniverse/",
+  },
+  {
+    title: "Message Sending Optimization",
+    context: "On-the-Job Training, 2025",
+    text: "Led performance work on message sending and cut redundant database accesses by refactoring logic, working on-site with the Chinese development team.",
+    tags: ["JavaScript", "Performance", "Database", "Refactoring"],
+    accent: "red",
+  },
+  {
+    title: "Let's Hue",
+    context: "Senior project, 2019",
+    text: "A web-based order and delivery system with an integrated chatbot, built as the senior project for a Bachelor of Science in Computer Science.",
+    tags: ["Node.js", "Web app", "Chatbot"],
+    accent: "gold",
+  },
+];
+
+export const skills = [
+  {
+    group: "Frontend",
+    items: ["Vue.js", "React.js", "Tailwind CSS"],
+  },
+  { group: "Backend", items: ["Spring Boot", ".NET"] },
+  { group: "Programming", items: ["Java", "JavaScript", "C#", "Python"] },
+  { group: "Databases", items: ["PostgreSQL", "MySQL", "SSMS", "Cassandra"] },
+  {
+    group: "Tools",
+    items: ["Git", "GitHub", "Docker", "Windows", "Linux", "Apache Guacamole"],
+  },
+];
+
+export const languages = [
+  { name: "Thai", level: "Native" },
+  { name: "English", level: "TOEIC 845" },
+];
+
+export const training = {
+  title: "On-the-Job Training",
+  org: "Fujitsu Nanjing Software Technology Co., Ltd.",
+  period: "Jan 2025 – Mar 2025",
+  bullets: [
+    "Led performance optimization to improve message sending performance.",
+    "Reduced redundant database accesses through logic refactoring.",
+    "Collaborated on-site with the Chinese development team on system optimization initiatives.",
+  ],
+};
+
+export const education = {
+  degree: "Bachelor of Science in Computer Science",
+  university: "King Mongkut's University of Technology North Bangkok",
+  period: "2015 – 2019",
+};

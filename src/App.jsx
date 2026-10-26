@@ -2,6 +2,12 @@ import NavBar from "./components/NavBar";
 import Intro from "./components/Intro";
 import About from "./components/About";
 import Experience from "./components/Experience";
+import Skills from "./components/Skills";
+import Training from "./components/Training";
+import Education from "./components/Education";
+import Projects from "./components/Projects";
+
+import { profile } from "./data.js";
 
 function App() {
   return (
@@ -14,9 +20,20 @@ function App() {
         <Intro />
         <About />
         <Experience />
+        <Projects />
+        <Skills />
+        <Training />
+        <Education />
       </main>
       <footer className="footer">
-        <div className="container"></div>
+        <div className="container">
+          {/* <span className="copyright-symbol">©</span> 2026 {profile.name}. All
+          rights reserved. */}
+          <p>
+            <span className="copyright-symbol">©</span> 2026 {profile.name}. All
+            rights reserved.
+          </p>
+        </div>
       </footer>
     </>
   );
