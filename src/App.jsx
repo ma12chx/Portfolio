@@ -27,11 +27,11 @@ function App() {
       </main>
       <footer className="footer">
         <div className="container">
-          {/* <span className="copyright-symbol">©</span> 2026 {profile.name}. All
-          rights reserved. */}
           <p>
-            <span className="copyright-symbol">©</span> 2026 {profile.name}. All
-            rights reserved.
+            <span className="copyright-symbol" aria-hidden="true">
+              ©
+            </span>{" "}
+            {new Date().getFullYear()} {profile.name}. All rights reserved.
           </p>
         </div>
       </footer>

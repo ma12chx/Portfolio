@@ -104,14 +104,14 @@ export const projects = [
     title: "Message Sending Optimization",
     context: "On-the-Job Training, 2025",
     text: "Led performance work on message sending and cut redundant database accesses by refactoring logic, working on-site with the Chinese development team.",
-    tags: ["JavaScript", "Performance", "Database", "Refactoring"],
+    tags: ["JavaScript", "Performance", "Refactoring"],
     accent: "red",
   },
   {
     title: "Let's Hue",
     context: "Senior project, 2019",
     text: "A web-based order and delivery system with an integrated chatbot, built as the senior project for a Bachelor of Science in Computer Science.",
-    tags: ["Node.js", "Web app", "Chatbot"],
+    tags: ["Node.js", "Web app", "Line Chatbot"],
     accent: "gold",
   },
 ];
