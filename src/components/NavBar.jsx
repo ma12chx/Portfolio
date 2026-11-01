@@ -54,6 +54,24 @@ function NavBar() {
     };
   }, []);
 
+  // Animates window scroll to `target` (px). Calls onDone when finished.
+  function smoothScrollTo(target, onDone) {
+    const start = window.scrollY;
+    const dist = target - start;
+    const duration = Math.min(1600, Math.max(700, Math.abs(dist) * 0.45));
+    let t0 = null;
+
+    const step = (now) => {
+      if (t0 === null) t0 = now; // first frame is the start time
+      const p = Math.min(1, (now - t0) / duration);
+      const eased = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      window.scrollTo({ top: start + dist * eased, behavior: "instant" });
+      if (p < 1) requestAnimationFrame(step);
+      else onDone();
+    };
+    requestAnimationFrame(step);
+  }
+
   // Slower, eased scroll to a section.
   const goTo = (e, id) => {
     const el = document.getElementById(id);
@@ -62,10 +80,7 @@ function NavBar() {
     setOpen(false);
     setActive(id);
 
-    const start = window.scrollY;
-    const target = el.getBoundingClientRect().top + start - NAV_HEIGHT;
-    const dist = target - start;
-
+    const target = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;
     const reduce = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -74,18 +89,10 @@ function NavBar() {
       return;
     }
 
-    const duration = Math.min(1600, Math.max(700, Math.abs(dist) * 0.45));
-    const t0 = performance.now();
     scrolling.current = true;
-
-    const step = (now) => {
-      const p = Math.min(1, (now - t0) / duration);
-      const eased = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
-      window.scrollTo({ top: start + dist * eased, behavior: "instant" });
-      if (p < 1) requestAnimationFrame(step);
-      else scrolling.current = false;
-    };
-    requestAnimationFrame(step);
+    smoothScrollTo(target, () => {
+      scrolling.current = false;
+    });
   };
 
   return (
