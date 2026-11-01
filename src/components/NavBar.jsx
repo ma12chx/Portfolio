@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { profile } from "../data";
 import { MenuIcon, CloseIcon } from "./Icons.jsx";
 
@@ -11,25 +11,82 @@ const links = [
   { id: "education", label: "Education" },
 ];
 
+const NAV_HEIGHT = 64;
+
 function NavBar() {
   const [active, setActive] = useState(1); // About
   const [open, setOpen] = useState(false);
+  const scrolling = useRef(false); // true while a link click is animating
 
   // Highlight the link for the section currently in view.
   useEffect(() => {
-    const els = links.map((l) => document.getElementById(l.id)).filter(Boolean);
-    if (!("IntersectionObserver" in window) || els.length === 0) return;
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    els.forEach((el) => obs.observe(el));
-    return () => obs.disconnect();
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      if (scrolling.current) return;
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4;
+      if (atBottom) {
+        setActive(links[links.length - 1].id);
+        return;
+      }
+      const line = window.innerHeight * 0.35;
+      let current = links[0].id;
+      for (const l of links) {
+        const el = document.getElementById(l.id);
+        if (el && el.getBoundingClientRect().top <= line) current = l.id;
+      }
+      setActive(current);
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
+
+  // Slower, eased scroll to a section.
+  const goTo = (e, id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    setOpen(false);
+    setActive(id);
+
+    const start = window.scrollY;
+    const target = el.getBoundingClientRect().top + start - NAV_HEIGHT;
+    const dist = target - start;
+
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduce) {
+      window.scrollTo({ top: target, behavior: "instant" });
+      return;
+    }
+
+    const duration = Math.min(1600, Math.max(700, Math.abs(dist) * 0.45));
+    const t0 = performance.now();
+    scrolling.current = true;
+
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / duration);
+      const eased = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      window.scrollTo({ top: start + dist * eased, behavior: "instant" });
+      if (p < 1) requestAnimationFrame(step);
+      else scrolling.current = false;
+    };
+    requestAnimationFrame(step);
+  };
 
   return (
     <header className="nav">
@@ -50,7 +107,7 @@ function NavBar() {
                   href={`#${l.id}`}
                   className={active === l.id ? "is-active" : undefined}
                   aria-current={active === l.id ? "true" : undefined}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => goTo(e, l.id)}
                 >
                   {l.label}
                 </a>
